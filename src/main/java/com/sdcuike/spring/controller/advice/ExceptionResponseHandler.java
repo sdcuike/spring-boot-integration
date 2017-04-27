@@ -47,7 +47,7 @@ public class ExceptionResponseHandler extends ResponseEntityExceptionHandler {
         }
         
         Map<String, Object> result = new HashMap<>();
-        result.put("", ex.getMessage());
+        result.put(status.toString(), ex.getMessage());
         result.put("body", body);
         
         log.error("handleExceptionInternal:{}", result, ex);
