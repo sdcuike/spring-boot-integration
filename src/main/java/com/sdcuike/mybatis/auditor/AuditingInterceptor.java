@@ -52,7 +52,11 @@ public class AuditingInterceptor implements Interceptor {
         } else if (SqlCommandType.INSERT == sqlCommandType) {
             auditingEntity.setCreateBy(userId);
             auditingEntity.setCreateTime(currentDateTime);
+            
+            auditingEntity.setLastmodifiedBy(userId);
+            auditingEntity.setLastmodifiedTime(currentDateTime);
         }
+        
         return invocation.proceed();
     }
     
