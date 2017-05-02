@@ -32,7 +32,7 @@ public class ExceptionResponseHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleSysException(Exception ex, WebRequest request) {
         Map<String, Object> result = new HashMap<>();
-        result.put(HttpStatus.INTERNAL_SERVER_ERROR.toString(), "ex.getMessage()");
+        result.put(HttpStatus.INTERNAL_SERVER_ERROR.toString(), ex.getMessage());
         log.error("handleException:{}", result, ex);
         return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
     }
