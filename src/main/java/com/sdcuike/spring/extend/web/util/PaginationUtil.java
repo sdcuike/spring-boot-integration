@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -19,6 +20,21 @@ import java.util.Map.Entry;
 public final class PaginationUtil {
     
     public static void setPaginationHttpHeaders(Page<?> page, String baseUrl, HttpServletResponse response) throws URISyntaxException {
+        HttpHeaders httpHeaders = generatePaginationHttpHeaders(page, baseUrl);
+        
+        for (Entry<String, List<String>> entry : httpHeaders.entrySet()) {
+            String name = entry.getKey();
+            for (String value : entry.getValue()) {
+                response.addHeader(name, value);
+            }
+        }
+    }
+    public static void setPaginationHttpHeaders(Page<?> page, HttpServletRequest request, HttpServletResponse response) throws URISyntaxException {
+        String contextPath = request.getContextPath();
+        String baseUrl = request.getRequestURI();
+        if (!contextPath.equals("".trim())){
+            baseUrl = baseUrl.substring(contextPath.length());
+        }
         HttpHeaders httpHeaders = generatePaginationHttpHeaders(page, baseUrl);
         
         for (Entry<String, List<String>> entry : httpHeaders.entrySet()) {
