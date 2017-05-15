@@ -19,7 +19,7 @@ import java.util.*;
  *         处理自定义注解 {@link SpringHandlerInterceptor}，自动配置HandlerInterceptor
  */
 public abstract class MvcConfigurerAdapter extends WebMvcConfigurerAdapter {
-    @Autowired
+    @Autowired(required = false)
     private List<HandlerInterceptor> handlerInterceptors;
 
     @Override
