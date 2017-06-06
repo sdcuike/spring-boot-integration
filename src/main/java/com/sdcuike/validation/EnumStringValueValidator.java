@@ -18,7 +18,7 @@ public class EnumStringValueValidator implements ConstraintValidator<EnumStringV
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         
-        com.handchina.validation.IEnumStringValue enumIntValue = com.handchina.validation.IEnumStringValue.of(this.enumIntValueValidation.enumClass(), value);
+        IEnumStringValue enumIntValue = IEnumStringValue.of(this.enumIntValueValidation.enumClass(), value);
         
         return enumIntValue != null;
     }

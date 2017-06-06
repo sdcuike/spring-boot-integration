@@ -4,7 +4,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * Created by cuikexiang on 2017/6/5.
+ * Created by sdcuike on 2017/6/5.
  */
 public class EnumIntValueValidator implements ConstraintValidator<EnumIntValueValidation, Integer> {
     
@@ -18,7 +18,7 @@ public class EnumIntValueValidator implements ConstraintValidator<EnumIntValueVa
     @Override
     public boolean isValid(Integer value, ConstraintValidatorContext context) {
         
-        com.handchina.validation.IEnumIntValue enumIntValue = com.handchina.validation.IEnumIntValue.of(this.enumIntValueValidation.enumClass(), value);
+        IEnumIntValue enumIntValue = IEnumIntValue.of(this.enumIntValueValidation.enumClass(), value);
         
         return enumIntValue != null;
     }
