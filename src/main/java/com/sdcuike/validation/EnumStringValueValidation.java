@@ -1,7 +1,7 @@
 package com.sdcuike.validation;
 
 /**
- * Created by sdcuike on 2017/6/5.
+ * Created by beaver on 2017/6/5.
  */
 public @interface EnumStringValueValidation {
     

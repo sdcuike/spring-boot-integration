@@ -23,9 +23,9 @@
         <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <spring-boot.version>1.5.3.RELEASE</spring-boot.version>
+        <spring-boot.version>1.5.4.RELEASE</spring-boot.version>
         <lombok.version>1.16.16</lombok.version>
-        <org.mapstruct.version>1.2.0.Beta2</org.mapstruct.version>
+        <org.mapstruct.version>1.2.0.Beta3</org.mapstruct.version>
 
         <snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
         <asciidoctor-plugin.version>1.5.3</asciidoctor-plugin.version>
@@ -45,7 +45,7 @@
         <assembly-plugin.version>2.6</assembly-plugin.version>
         <source-plugin.version>3.0.0</source-plugin.version>
         <jar-plugin.version>2.6</jar-plugin.version>
-        <maven.test.skip>false</maven.test.skip>
+        <maven.test.skip>true</maven.test.skip>
 
     </properties>
 

@@ -4,7 +4,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * Created by sdcuike on 2017/6/5.
+ * Created by beaver on 2017/6/5.
  */
 public class EnumStringValueValidator implements ConstraintValidator<EnumStringValueValidation, String> {
     
