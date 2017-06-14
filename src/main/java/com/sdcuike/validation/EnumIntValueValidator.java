@@ -6,6 +6,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * Created by beaver on 2017/6/5.
  */
+
 public class EnumIntValueValidator implements ConstraintValidator<EnumIntValueValidation, Integer> {
     
     private EnumIntValueValidation enumIntValueValidation;

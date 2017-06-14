@@ -13,8 +13,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Target({METHOD, FIELD, CONSTRUCTOR, PARAMETER})
 @Retention(RUNTIME)
-@Constraint(validatedBy = {EnumIntValueValidator.class})
-public @interface EnumIntValueValidation {
+@Constraint(validatedBy = {EnumIntValueListValidator.class})
+public @interface EnumIntValueListValidation {
     
     String message() default "Invalid value. This is not permitted.";
     
