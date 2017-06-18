@@ -13,15 +13,19 @@ import java.util.*;
  * Created by beaver on 2017/6/12.
  */
 public class RichUserDetails implements UserDetails, CredentialsContainer {
-    private final Long id;
-    private final String phone;
-    private final String loginNmae;
+    private Long id;
+    private String phone;
+    private String loginNmae;
     private String password;
-    private final Set<GrantedAuthority> authoritie;
-    private final boolean accountNonExpired;
-    private final boolean accountNonLocked;
-    private final boolean credentialsNonExpired;
-    private final boolean enabled;
+    private List<GrantedAuthority> authoritie;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
+    private boolean enabled;
+    
+    public RichUserDetails() {
+    
+    }
     
     public RichUserDetails(Long id, String phone, String loginNmae, String password,
                            Collection<? extends GrantedAuthority> authorities) {
@@ -41,12 +45,14 @@ public class RichUserDetails implements UserDetails, CredentialsContainer {
         this.accountNonExpired = accountNonExpired;
         this.credentialsNonExpired = credentialsNonExpired;
         this.accountNonLocked = accountNonLocked;
-        this.authoritie = Collections.unmodifiableSet(sortAuthorities(authorities));
+        this.authoritie = Collections.unmodifiableList(new ArrayList<>(authorities));
     }
     
+    @Override
     public Collection<GrantedAuthority> getAuthorities() {
         return authoritie;
     }
+    
     
     @Override
     public String getPassword() {
@@ -58,27 +64,84 @@ public class RichUserDetails implements UserDetails, CredentialsContainer {
         return loginNmae;
     }
     
+    @Override
     public boolean isEnabled() {
         return enabled;
     }
     
+    @Override
     public boolean isAccountNonExpired() {
         return accountNonExpired;
     }
     
+    @Override
     public boolean isAccountNonLocked() {
         return accountNonLocked;
     }
     
+    @Override
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
     
+    @Override
     public void eraseCredentials() {
         password = null;
     }
     
-    private static SortedSet<GrantedAuthority> sortAuthorities(
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    
+    public String getLoginNmae() {
+        return loginNmae;
+    }
+    
+    public void setLoginNmae(String loginNmae) {
+        this.loginNmae = loginNmae;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public List<GrantedAuthority> getAuthoritie() {
+        return authoritie;
+    }
+    
+    public void setAuthoritie(List<GrantedAuthority> authoritie) {
+        this.authoritie = authoritie;
+    }
+    
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+    
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+    
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+    
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+    
+    public String getPhone() {
+        return phone;
+    }
+    
+    public static SortedSet<GrantedAuthority> sortAuthorities(
             Collection<? extends GrantedAuthority> authorities) {
         Assert.notNull(authorities, "Cannot pass a null GrantedAuthority collection");
         SortedSet<GrantedAuthority> sortedAuthorities = new TreeSet<GrantedAuthority>(
@@ -93,16 +156,9 @@ public class RichUserDetails implements UserDetails, CredentialsContainer {
         return sortedAuthorities;
     }
     
-    public Long getId() {
-        return id;
-    }
     
-    public String getPhone() {
-        return phone;
-    }
-    
-    private static class AuthorityComparator implements Comparator<GrantedAuthority>,
-                                                        Serializable {
+    public static class AuthorityComparator implements Comparator<GrantedAuthority>,
+                                                       Serializable {
         private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
         
         public int compare(GrantedAuthority g1, GrantedAuthority g2) {
