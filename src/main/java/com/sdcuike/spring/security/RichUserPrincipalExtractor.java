@@ -14,7 +14,7 @@ public class RichUserPrincipalExtractor implements PrincipalExtractor {
     public Object extractPrincipal(Map<String, Object> map) {
         RichUserDetails richUserDetails = new RichUserDetails();
         try {
-            BeanUtils.copyProperties(richUserDetails,map);
+            BeanUtils.populate(richUserDetails, map);
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
