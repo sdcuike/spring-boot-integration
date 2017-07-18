@@ -13,6 +13,8 @@ import java.util.*;
  * Created by beaver on 2017/6/12.
  */
 public class RichUserDetails implements UserDetails, CredentialsContainer {
+    static final long serialVersionUID = 1L;
+    
     private Long id;
     private String phone;
     private String loginNmae;
