@@ -13,7 +13,7 @@ import java.sql.SQLException;
 /**
  * Created by beaver on 2017/6/9.
  */
-public class IEnumIntValueTypeHander extends BaseTypeHandler<IEnumIntValue> {
+public abstract class IEnumIntValueTypeHander extends BaseTypeHandler<IEnumIntValue> {
     
     private Class<IEnumIntValue> type;
     

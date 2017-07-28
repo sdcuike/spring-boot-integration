@@ -19,20 +19,13 @@ import java.util.Map.Entry;
  */
 public final class PaginationUtil {
     
-    public static void setPaginationHttpHeaders(Page<?> page, String baseUrl, HttpServletResponse response) throws URISyntaxException {
-        HttpHeaders httpHeaders = generatePaginationHttpHeaders(page, baseUrl);
+    public static void setPaginationHttpHeaders(final Page<?> page,
+                                                final HttpServletRequest request,
+                                                final HttpServletResponse response) throws URISyntaxException {
         
-        for (Entry<String, List<String>> entry : httpHeaders.entrySet()) {
-            String name = entry.getKey();
-            for (String value : entry.getValue()) {
-                response.addHeader(name, value);
-            }
-        }
-    }
-    public static void setPaginationHttpHeaders(Page<?> page, HttpServletRequest request, HttpServletResponse response) throws URISyntaxException {
         String contextPath = request.getContextPath();
-        String baseUrl = request.getRequestURI();
-        if (!contextPath.equals("".trim())){
+        String baseUrl = request.getRequestURI() + "?" + (request.getQueryString() != null ? request.getQueryString() : "");
+        if (!contextPath.equals("".trim())) {
             baseUrl = baseUrl.substring(contextPath.length());
         }
         HttpHeaders httpHeaders = generatePaginationHttpHeaders(page, baseUrl);
@@ -70,11 +63,22 @@ public final class PaginationUtil {
     }
     
     private static String generateUri(String baseUrl, int page, int size) throws URISyntaxException {
-        return UriComponentsBuilder
-                .fromUriString(baseUrl)
-                .queryParam("page", page)
-                .queryParam("size", size)
-                .toUriString();
+        
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder
+                .fromUriString(baseUrl);
+        if (baseUrl.contains("page=")) {
+            uriComponentsBuilder = uriComponentsBuilder.replaceQueryParam("page", page);
+        } else {
+            uriComponentsBuilder = uriComponentsBuilder.queryParam("page", page);
+        }
+        
+        if (baseUrl.contains("size=")) {
+            uriComponentsBuilder = uriComponentsBuilder.replaceQueryParam("size", size);
+        } else {
+            uriComponentsBuilder = uriComponentsBuilder.queryParam("size", size);
+        }
+        
+        return uriComponentsBuilder.toUriString();
     }
     
     
