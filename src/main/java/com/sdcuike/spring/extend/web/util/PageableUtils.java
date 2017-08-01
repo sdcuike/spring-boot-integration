@@ -46,10 +46,7 @@ public final class PageableUtils {
         
         sort(pagedListHolder, sortDefinitions);
         pagedListHolder.setPage(pageable.getPageNumber());
-        Page<T> page = new PageImpl<>(pagedListHolder.getPageList(), pageable, list.size());
-        
-        return page;
-        
+        return new PageImpl<>(pagedListHolder.getPageList(), pageable, list.size());
     }
     
     private static void sort(final PagedListHolder pagedListHolder,
@@ -78,8 +75,8 @@ public final class PageableUtils {
         
         final Page<Person> currentPage = getCurrentPage(pageable, personList);
         System.out.println(out(currentPage));
-        System.out.println("isLast:"+currentPage.isLast());
-        System.out.println("isFirst:"+currentPage.isFirst());
+        System.out.println("isLast:" + currentPage.isLast());
+        System.out.println("isFirst:" + currentPage.isFirst());
     }
     
     private static String out(Page<?> currentPage) {
